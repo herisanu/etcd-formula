@@ -2,15 +2,26 @@
 # vim: ft=yaml
 
 etcd:
+  lookup:
+    user: etcd
+    group: etcd
+    service-name: etcd
+    install_base_url: http://github.com/coreos/etcd/releases/download
+  manage_users: True
+  use_systemd: True
+  use_upstart: False
+  version: 3.0.14
   binary_directory: /opt/etcd
-  data_directory: /opt/etcd/data
-
-  cluster:
-    token: my-etcd-cluster
-    peer_port: 2380
-    client_port: 2379
-  
-  install:
-    base_url: http://github.com/coreos/etcd/releases/download
-    version: 2.1.2
-
+  data_directory: /var/lib/etcd
+  config:
+    ETCD_NAME: "etcd0"
+    ETCD_INITIAL_CLUSTER: "etcd0=https://127.0.0.1:2380"
+    ETCD_INITIAL_CLUSTER_STATE: "new"
+    ETCD_INITIAL_CLUSTER_TOKEN: "etcd-cluster-1"
+    ETCD_INITIAL_ADVERTISE_PEER_URLS: "https://127.0.0.1:2380"
+    ETCD_LISTEN_PEER_URLS: "https://127.0.0.1:2380"
+    ETCD_LISTEN_CLIENT_URLS: "https://127.0.0.1:2379"
+    ETCD_ADVERTISE_CLIENT_URLS: "https://127.0.0.1:2379"
+    ETCD_DATA_DIR: "/var/lib/etcd"
+    ETCD_AUTO_TLS: "ON"
+    ETCD_PEER_AUTO_TLS: "ON"
