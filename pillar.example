@@ -2,8 +2,13 @@
 
 # Right now, only static configuration is supported
 etcd:
-   cluster:
-     peers:
-       node-1: 
-         ip: 192.168.1.10
-       
+  config:
+     ETCD_NAME="{{ etc_name }}"
+     ETCD_INITIAL_CLUSTER="{{ etc_initial_cluster }}"
+     ETCD_INITIAL_CLUSTER_STATE="new"
+     ETCD_INITIAL_CLUSTER_TOKEN="{{ etcd_initial_cluster_token }}"
+     ETCD_INITIAL_ADVERTISE_PEER_URLS="{{ etc_initial_advertise_peer_urls }}"
+     ETCD_DATA_DIR="{{ etcd_settings.data_directory }}"
+     ETCD_LISTEN_PEER_URLS="http://{{ node_ip }}:{{ peer_port }}"
+     ETCD_LISTEN_CLIENT_URLS="http://{{ node_ip }}:{{ client_port }}"
+     ETCD_ADVERTISE_CLIENT_URLS="{{ etcd_advertise_c}}"

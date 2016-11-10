@@ -1,0 +1,19 @@
+[Unit]
+Description=etcd key-value store
+Documentation=https://github.com/coreos/etcd
+After=network.target
+
+[Service]
+User={{ etcd.lookup.user }}
+Type=notify
+{% for key,value in etcd.config.items() -%}
+Environment={{ key }}={{ value }}
+{% endfor %}
+ExecStart={{ etcd.binary_directory }}/etcd-v{{ etcd.version }}-linux-amd64/etcd
+Restart=always
+RestartSec=10s
+LimitNOFILE=40000
+WorkingDirectory={{ etcd.data_directory }}
+
+[Install]
+WantedBy=multi-user.target
