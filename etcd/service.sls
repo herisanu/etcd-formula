@@ -10,5 +10,5 @@
 
 etcd-service:
   service.running:
-    - name: {{ etcd.service-name }}
+    - name: {{ etcd.lookup.service_name }}
     - enable: True

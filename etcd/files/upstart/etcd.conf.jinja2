@@ -9,9 +9,9 @@ stop on runlevel [016]
 respawn
 respawn limit 10 5
 
-{% for key,value in etcd.config.items() %}
+{% for key,value in etcd.config.items() -%}
 env {{ key }}="{{ value }}"
 {% endfor %}
 
 chdir {{ etcd.data_directory }}
-exec /usr/bin/etcd >>/var/log/etcd.log 2>&1
+exec {{ etcd.binary_directory }}/etcd-v{{ etcd.version }}-linux-amd64/etcd >>/var/log/etcd.log 2>&1
