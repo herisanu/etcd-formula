@@ -44,3 +44,13 @@ etcd-upstart-config:
     - watch_in:
       - service: etcd-service
 {% endif %}
+
+# etcd > 3.x.x is not compatible with TLSv1, which is used py the python-etcd
+# module. We need to patch it to disable TLSv1. This is the change introduced in
+# commit: https://github.com/jplana/python-etcd/commit/0d0145f5e835aa032c97a0a5e09c4c68b7a03f66
+{% if etcd.patch_python_etcd == True %}
+{{ etcd.python_client_lib_path }}:
+  file.patch:
+    - source: salt://files/etcd_client_patch
+    - hash: md5=09d0a08a56477209afa82dbef1dd596f
+{% endif %}
