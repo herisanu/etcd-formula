@@ -10,10 +10,12 @@ etcd:
   manage_users: True
   use_systemd: True
   use_upstart: False
+  patch_python_etcd: True
+  python_client_lib_path: 
   version: 3.0.14
   binary_directory: /opt/etcd
   data_directory: /var/lib/etcd
-  config:
+  config: /usr/lib/python2.7/site-packages/etcd/client.py
     ETCD_NAME: "etcd0"
     ETCD_DATA_DIR: "/var/lib/etcd"
     ETCD_INITIAL_CLUSTER: "etcd0=https://0.0.0.0:2380"
