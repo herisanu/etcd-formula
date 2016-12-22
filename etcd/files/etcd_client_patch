@@ -1,0 +1,15 @@
+--- /usr/lib/python2.7/site-packages/etcd/client.py	2016-12-22 13:41:54.913585308 +0000
++++ /usr/lib/python2.7/site-packages/etcd/client_patched.py	2016-12-22 10:13:15.914192859 +0000
+@@ -153,12 +153,6 @@
+         if self._read_timeout > 0:
+             kw['timeout'] = self._read_timeout
+
+-        if protocol == 'https':
+-            # If we don't allow TLSv1, clients using older version of OpenSSL
+-            # (<1.0) won't be able to connect.
+-            _log.debug("HTTPS enabled.")
+-            kw['ssl_version'] = ssl.PROTOCOL_TLSv1
+-
+         if cert:
+             if isinstance(cert, tuple):
+                 # Key and cert are separate
