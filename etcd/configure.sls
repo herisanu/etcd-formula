@@ -51,6 +51,6 @@ etcd-upstart-config:
 {% if etcd.patch_python_etcd == True %}
 {{ etcd.python_client_lib_path }}:
   file.patch:
-    - source: salt://files/etcd_client_patch
+    - source: salt://files/etcd_client_ssl_tlsv12.patch
     - hash: md5=09d0a08a56477209afa82dbef1dd596f
 {% endif %}
