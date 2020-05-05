@@ -19,7 +19,7 @@ etcd-systemd-config:
     - mode: '0750'
     - template: jinja
     - context:
-      etcd: {{ etcd }}
+      etcd: {{ etcd|json }}
     - watch_in:
       - service: etcd-service
 
@@ -40,7 +40,7 @@ etcd-upstart-config:
     - mode: '0750'
     - template: jinja
     - context:
-      etcd: {{ etcd }}
+      etcd: {{ etcd|json }}
     - watch_in:
       - service: etcd-service
 {% endif %}
